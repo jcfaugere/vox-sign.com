@@ -1,10 +1,174 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1" />
+
+<title>VOX</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+
+<meta http-equiv="Content-Language" content="EN" />
+<meta name="Language" content="EN" />
+<meta name="viewport" content="width=960, initial-scale=0.33, maximum-sclae=1" />
+<link rel="stylesheet" href="default.css" />
 </head>
+
 <body>
-	VOX : Postquantum Signature Scheme
+<div style="text-align: center;"><img src="images/vox.png" alt="VOX: post-quantum signature scheme"/></div>
+
+<hr />
+
+<h2>About <span class="voxfont">VOX</span></h2>
+
+<p><span class="voxfont">VOX</span> is a post-quantume signature
+algorithm submitted to NIST <a
+href="https://csrc.nist.gov/projects/post-quantum-cryptography">Post-Quantum
+Cryptography Project</a> on November 30th, 2017. It has been designed
+by: Benoît Cogliati,
+Jean-Charles Faugère,
+Pierre-Alain Fouque,
+Louis Goubin,
+Robin Larrieu,
+Gilles Macario-Rat,
+Brice Minaud and Jacques Patarin.
+</p>
+
+
+
+<p><span class="voxfont">VOX</span> is based on multivariate cryptography 
+  (UOV problem and the problem of solving algebraic equations).
+  </p>
+
+
+
+<h2>Performance (C Intel x86-64 and AVX2)</h2>
+
+<p>Using the reference implementation on a common laptop computer
+(11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz
+, TurboBoost enabled), <span
+class="voxfont">VOX</span> achieves the following performance:</p>
+
+<table>
+<tr class="titlerow">
+  <th>Level</th>
+  <th>Keygen </th>
+  <th>Sign </th>
+  <th>Sign [cached SK] </th>
+  <th>Verify  </th>
+  <th>Verify [cached PK] </th>
+  <th>publ size</th>
+  <th>sec size</th>
+  <th>sig size</th>
+</tr>
+<tr>
+  <td><span class="voxfont">VOX</span>-128</td>
+  <td class="values">1.30ms	/ 2350064 c</td>
+  <td class="values">0.38ms	/ 679237 c</td>
+  <td class="values">0.29ms	/ 517285 c</td>
+  <td class="values">0.22ms	/ 396311 c</td>
+  <td class="values">0.07ms	/ 134240 c</td>
+  <td class="values"></td>
+  <td class="values"></td>
+  <td class="values"></td>
+</tr>
+
+
+<tr>
+  <td><span class="voxfont">VOX</span>-192</td>
+  <td class="values">5.17ms	/ 9334246 c</td>
+  <td class="values">1.63ms	/ 2937318 c</td>
+  <td class="values">1.14ms	/ 2061593 c</td>
+  <td class="values">0.86ms	/ 1548342 c</td>
+  <td class="values">0.27ms	/ 486889 c</td>
+  <td class="values"></td>
+  <td class="values"></td>
+  <td class="values"></td>
+</tr>
+<tr>
+  <td><span class="voxfont">VOX</span>-256</td>
+  <td class="values"> 14.46ms	/ 26097363 c</td>
+  <td class="values">7.33ms	/ 13226130 c</td>
+  <td class="values">5.41ms	/ 9772441 c</td>
+  <td class="values">2.07ms	/ 3734592 c</td>
+  <td class="values">0.65ms	/ 1180465 c</td>
+  <td class="values"></td>
+  <td class="values"></td>
+  <td class="values"></td>
+</tr>
+</table>
+
+<p>All the timings are given in milliseconds (ms) and in cycles (c)
+</p>
+
+<p>Using AVX2 implementation on a common laptop computer
+  (11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz
+  , TurboBoost enabled), <span
+  class="voxfont">VOX</span> achieves the following performance:</p>
+  
+  <table>
+  <tr class="titlerow">
+    <th>Level</th>
+    <th>Keygen </th>
+    <th>Sign </th>
+    <th>Sign [cached SK] </th>
+    <th>Verify  </th>
+    <th>Verify [cached PK] </th>
+    <th>publ size</th>
+    <th>sec size</th>
+    <th>sig size</th>
+  </tr>
+  <tr>
+    <td><span class="voxfont">VOX</span>-128</td>
+    <td class="values">0.39ms	/ 707796 c</td>
+    <td class="values">0.37ms	/ 664265 c</td>
+    <td class="values">0.27ms	/ 488308 c</td>
+    <td class="values">0.09ms	/ 168567 c</td>
+    <td class="values">0.02ms	/ 44085 c</td>
+    <td class="values"></td>
+    <td class="values"></td>
+    <td class="values"></td>
+  </tr>
+  <tr>
+    <td><span class="voxfont">VOX</span>-192</td>
+    <td class="values">2.22ms	/ 4006402 c</td>
+    <td class="values">1.50ms	/ 2709851 c</td>
+    <td class="values">1.05ms	/ 1887598 c</td>
+    <td class="values">0.40ms	/ 713968 c</td>
+    <td class="values">0.08ms	/ 141778 c</td>
+    <td class="values"></td>
+    <td class="values"></td>
+    <td class="values"></td>
+  </tr>
+  <tr>
+    <td><span class="voxfont">VOX</span>-256</td>
+    <td class="values"> 7.14ms /12893376 c</td>
+    <td class="values">6.71ms	/ 12110394 cc</td>
+    <td class="values">4.93ms	/ 8902607 c</td>
+    <td class="values">0.88ms	/ 1585504 c</td>
+    <td class="values">0.14ms	/ 259305 c</td>
+    <td class="values"></td>
+    <td class="values"></td>
+    <td class="values"></td>
+  </tr>
+  </table>
+  
+  <p>All the timings are given in milliseconds (ms) and in cycles (c)
+  </p>
+  
+  
+<h2>Resources</h2>
+
+<p><strong>(Version 2023-05-31):</strong> .</p>
+
+<ul>
+<li><span class="voxfont">VOX</span> specification <a href="vox.pdf">[pdf]</a></li>
+<li><span class="voxfont">VOX</span> submission package <a href="vox_nist.zip">[zip]</a> (specification, source code, scripts and test vectors)</li>
+  <li><span class="voxfont">VOX</span> KAT files <a href="vox_kat.zip">[zip]</a></li>
+  <li>An implementation in Flint is also provided.</li>
+</ul>
+
+
 </body>
 </html>
