@@ -41,6 +41,31 @@ Brice Minaud and Jacques Patarin.
   (UOV problem and the problem of solving algebraic equations).
   </p>
 
+  <p>VOX is a UOV-based hash-and-sign signature scheme from the Multivariate Quadratic
+    (MQ) family. In order to reduce the size of the public key, we use a new variant proposed by
+    Faugère, Macario-Rat, Patarin, and Perret under the name UOVˆ+ and the QR (Quotient
+    Ring) technique introduced by Furue, Ikematsu, Kiyomura, and Takagi at ASIACRYPT
+    2021. The UOVˆ+ has an interesting security property. The quadratic forms of a UOV
+    public key have a large common isotropic subspace, which is unusual for a random quadratic
+    system. UOVˆ+ adds a small number of random quadratic forms to the public keys to
+    hide this subspace. This makes the signing process more complex since we have to solve a
+    small quadratic system, but also allows us to reduce the public key of UOV for equivalent
+    security.</p>
+
+    <p>Hence, the size of the signature is only 102 bytes for VOX-I with 128 bits
+       of security for public key size 9.1Kbytes. The verification time is very 
+       good and we can sign 3700 messages per second if the secret key is 
+       decompressed.</p>
+  <h2>VOX Parameters </h2>
+  <p>
+  We define the parameters for each variant of VOX according to the three security levels
+defined by the NIST. </p>
+
+<img src="images/vox_parameters.png"
+     alt="VOX Parameters" title="Parameter sets and corresponding key and signature sizes for the VOX signature
+     scheme" height="150">
+<p>The size of the signature (|sig|), the public key (|cpk|), the secret key (|sk|) 
+and the compressed secret key (|csk|) are expressed in bytes.</p>
 
 
 <h2>Performance (C Intel x86-64 and AVX2)</h2>
@@ -58,9 +83,6 @@ class="voxfont">VOX</span> achieves the following performance:</p>
   <th>Sign [cached SK] </th>
   <th>Verify  </th>
   <th>Verify [cached PK] </th>
-  <th>publ size</th>
-  <th>sec size</th>
-  <th>sig size</th>
 </tr>
 <tr>
   <td><span class="voxfont">VOX</span>-128</td>
@@ -69,9 +91,6 @@ class="voxfont">VOX</span> achieves the following performance:</p>
   <td class="values">0.29ms	/ 517285 c</td>
   <td class="values">0.22ms	/ 396311 c</td>
   <td class="values">0.07ms	/ 134240 c</td>
-  <td class="values"></td>
-  <td class="values"></td>
-  <td class="values"></td>
 </tr>
 
 
@@ -82,9 +101,6 @@ class="voxfont">VOX</span> achieves the following performance:</p>
   <td class="values">1.14ms	/ 2061593 c</td>
   <td class="values">0.86ms	/ 1548342 c</td>
   <td class="values">0.27ms	/ 486889 c</td>
-  <td class="values"></td>
-  <td class="values"></td>
-  <td class="values"></td>
 </tr>
 <tr>
   <td><span class="voxfont">VOX</span>-256</td>
@@ -93,9 +109,6 @@ class="voxfont">VOX</span> achieves the following performance:</p>
   <td class="values">5.41ms	/ 9772441 c</td>
   <td class="values">2.07ms	/ 3734592 c</td>
   <td class="values">0.65ms	/ 1180465 c</td>
-  <td class="values"></td>
-  <td class="values"></td>
-  <td class="values"></td>
 </tr>
 </table>
 
@@ -115,9 +128,6 @@ class="voxfont">VOX</span> achieves the following performance:</p>
     <th>Sign [cached SK] </th>
     <th>Verify  </th>
     <th>Verify [cached PK] </th>
-    <th>publ size</th>
-    <th>sec size</th>
-    <th>sig size</th>
   </tr>
   <tr>
     <td><span class="voxfont">VOX</span>-128</td>
@@ -126,9 +136,6 @@ class="voxfont">VOX</span> achieves the following performance:</p>
     <td class="values">0.27ms	/ 488308 c</td>
     <td class="values">0.09ms	/ 168567 c</td>
     <td class="values">0.02ms	/ 44085 c</td>
-    <td class="values"></td>
-    <td class="values"></td>
-    <td class="values"></td>
   </tr>
   <tr>
     <td><span class="voxfont">VOX</span>-192</td>
@@ -137,9 +144,6 @@ class="voxfont">VOX</span> achieves the following performance:</p>
     <td class="values">1.05ms	/ 1887598 c</td>
     <td class="values">0.40ms	/ 713968 c</td>
     <td class="values">0.08ms	/ 141778 c</td>
-    <td class="values"></td>
-    <td class="values"></td>
-    <td class="values"></td>
   </tr>
   <tr>
     <td><span class="voxfont">VOX</span>-256</td>
@@ -148,14 +152,14 @@ class="voxfont">VOX</span> achieves the following performance:</p>
     <td class="values">4.93ms	/ 8902607 c</td>
     <td class="values">0.88ms	/ 1585504 c</td>
     <td class="values">0.14ms	/ 259305 c</td>
-    <td class="values"></td>
-    <td class="values"></td>
-    <td class="values"></td>
   </tr>
   </table>
   
   <p>All the timings are given in milliseconds (ms) and in cycles (c)
   </p>
+
+  <p> The verification time is very good and we can sign 3700 messages
+    per second if the secret key is decompressed and 2700 otherwise.</p>
   
   
 <h2>Resources</h2>
@@ -163,7 +167,7 @@ class="voxfont">VOX</span> achieves the following performance:</p>
 <p><strong>(Version 2023-05-31):</strong> .</p>
 
 <ul>
-<li><span class="voxfont">VOX</span> specification <a href="files/vox.pdf">[pdf]</a></li>
+<li><span class="voxfont">VOX</span> specification <a href="files/vox_nist.pdf">[pdf]</a></li>
 <li><span class="voxfont">VOX</span> submission package <a href="files/vox_nist.zip">[zip]</a> (specification, source code, scripts and test vectors)</li>
   <li><span class="voxfont">VOX</span> KAT files <a href="files/vox_kat.zip">[zip]</a></li>
   <li>An implementation in Flint is also provided.</li>
