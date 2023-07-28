@@ -41,7 +41,15 @@ Brice Minaud and Jacques Patarin.
   (UOV problem and the problem of solving algebraic equations).
   </p>
 
-  <p>VOX is a UOV-based hash-and-sign signature scheme from the Multivariate Quadratic
+
+
+  <h2><span class="voxfont">Updates / News</span></h2>
+  <p>
+    Update of the <a href="files/VOX_27_07_2023.pdf">[pdf]</a>: we add a clarification in the matrix representation of the linear mappings and their operations on vectors. 
+    </p>
+
+    <h2>About <span class="voxfont">VOX</span></h2>
+      <p>VOX is a UOV-based hash-and-sign signature scheme from the Multivariate Quadratic
     (MQ) family. In order to reduce the size of the public key, we use a new variant proposed by
     Faugère, Macario-Rat, Patarin, and Perret under the name UOVˆ+ and the QR (Quotient
     Ring) technique introduced by Furue, Ikematsu, Kiyomura, and Takagi at ASIACRYPT
@@ -51,11 +59,6 @@ Brice Minaud and Jacques Patarin.
     hide this subspace. This makes the signing process more complex since we have to solve a
     small quadratic system, but also allows us to reduce the public key of UOV for equivalent
     security.</p>
-
-  <p>
-    Update of the <a href="files/VOX_27_07_2023.pdf">[pdf]</a>: we add a clarification in the matrix representation of the linear mappings and their operations on vectors. 
-    >/p>
-    
     <p>Hence, the size of the signature is only 102 bytes for VOX-I with 128 bits
        of security for public key size 9.1Kbytes. The verification time is very 
        good and we can sign 3700 messages per second if the secret key is 
