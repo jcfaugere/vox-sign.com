@@ -67,9 +67,8 @@ Version 1.1 (16/05/2024): In-depth analysis of the impact of rectangular attacks
     hide this subspace. This makes the signing process more complex since we have to solve a
     small quadratic system, but also allows us to reduce the public key of UOV for equivalent
     security.</p>
-    <p>Hence, the size of the signature is only 124 bytes for FOX-I with 128 bits
-       of security for public key size 50.3 Kbytes. The verification time is very 
-       good and we can sign 230 messages per second if the secret key is 
+    <p>Hence, the size of the signature is only 124 bytes for FOX-I with security level I for public key size 50.3 Kbytes. The verification time is very 
+       good and we can sign 277 messages per second if the secret key is 
        decompressed.</p>
   <h2><span class="voxfont">FOX</span> Parameters </h2>
   <p>
@@ -173,8 +172,8 @@ class="voxfont">FOX</span> achieves the following performance:</p>
   <p>All the timings are given in milliseconds (ms) and in cycles (c)
   </p>
 
-  <p> The verification time is very good and we can sign 3700 messages
-    per second if the secret key is decompressed and 2700 otherwise.</p>
+  <p> The verification time is very good and we can sign 277 messages
+    per second if the secret key is decompressed and 236 otherwise.</p>
   
   
 <h2>Resources</h2>
