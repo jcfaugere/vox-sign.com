@@ -59,12 +59,10 @@ Version 1.1 (16/05/2024): In-depth analysis of the impact of rectangular attacks
    </li>
 </ul>
 
-    <h2><span class="voxfont">VOX</span>: a UOV-based hash-and-sign signature scheme</h2>
-      <p>VOX is a UOV-based hash-and-sign signature scheme from the Multivariate Quadratic
+    <h2><span class="voxfont">FOX</span>: a UOV-based hash-and-sign signature scheme</h2>
+      <p><span class="voxfont">FOX</span> is a UOV-based hash-and-sign signature scheme from the Multivariate Quadratic
     (MQ) family. In order to reduce the size of the public key, we use a new variant proposed by
-    Faugère, Macario-Rat, Patarin, and Perret under the name UOVˆ+ and the QR (Quotient
-    Ring) technique introduced by Furue, Ikematsu, Kiyomura, and Takagi at ASIACRYPT
-    2021. The UOVˆ+ has an interesting security property. The quadratic forms of a UOV
+    Faugère, Macario-Rat, Patarin, and Perret under the name UOVˆ+. The UOVˆ+ has an interesting security property. The quadratic forms of a UOV
     public key have a large common isotropic subspace, which is unusual for a random quadratic
     system. UOVˆ+ adds a small number of random quadratic forms to the public keys to
     hide this subspace. This makes the signing process more complex since we have to solve a
@@ -74,13 +72,13 @@ Version 1.1 (16/05/2024): In-depth analysis of the impact of rectangular attacks
        of security for public key size 9.1Kbytes. The verification time is very 
        good and we can sign 3700 messages per second if the secret key is 
        decompressed.</p>
-  <h2>VOX Parameters </h2>
+  <h2><span class="voxfont">FOX</span> Parameters </h2>
   <p>
   We define the parameters for each variant of VOX according to the three security levels
 defined by the NIST. </p>
 
 <img src="images/vox_parameters.png"
-     alt="VOX Parameters" title="Parameter sets and corresponding key and signature sizes for the VOX signature
+     alt="FOX Parameters" title="Parameter sets and corresponding key and signature sizes for the VOX signature
      scheme" height="150">
 <p>The size of the signature (|sig|), the public key (|cpk|), the secret key (|sk|) 
 and the compressed secret key (|csk|) are expressed in bytes.</p>
