@@ -1,30 +1,34 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1" />
+<!-- saved from url=(0021)https://vox-sign.com/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
 
 <title>VOX</title>
-<meta name="description" content="" />
-<meta name="keywords" content="" />
+<meta name="description" content="">
+<meta name="keywords" content="">
 
-<meta http-equiv="Content-Language" content="EN" />
-<meta name="Language" content="EN" />
-<meta name="viewport" content="width=960, initial-scale=0.33, maximum-scale=1" />
-<link rel="stylesheet" href="default.css" />
+<meta http-equiv="Content-Language" content="EN">
+<meta name="Language" content="EN">
+<meta name="viewport" content="width=960, initial-scale=0.33, maximum-scale=1">
+<link rel="stylesheet" href="./VOX_files/default.css">
 </head>
 
 <body>
-<div style="text-align: center;"><img src="images/vox.png" alt="VOX: post-quantum signature scheme"/></div>
+<div style="text-align: center;"><img src="./VOX_files/vox.png" alt="VOX: post-quantum signature scheme"></div>
 
-<hr />
+<div style="text-align: center;">
+<h1>Vinegar, Oil, and Multiplications for short post-quantum signatures
+</h1>
+</div>
+
+<hr>
 
 <h2>About <span class="voxfont">VOX/FOX</span></h2>
 
 <p><span class="voxfont">VOX</span> is family a post-quantum signature
-algorithms submitted to NIST <a
-href="https://csrc.nist.gov/projects/post-quantum-cryptography">Post-Quantum
+algorithms submitted to NIST <a href="https://csrc.nist.gov/projects/post-quantum-cryptography">Post-Quantum
 Cryptography Project</a> on May 31th, 2023. It has been designed
 by: Benoît Cogliati,
 Jean-Charles Faugère,
@@ -37,7 +41,9 @@ Brice Minaud and Jacques Patarin.
 
 <p>The <span class="voxfont">VOX</span> family includes a specific instantiation called “VOX-F” (or Full VOX, nicknamed “FOX”) that does not use the QR technique and allows to obtain easier security arguments.
   </p>
-  
+
+<p> Due to attacks on the QR technique (see the Updates/News section below for more details), <span class="voxfont">FOX</span> is at present our main version of <span class="voxfont">VOX</span>.</p>
+
 <p><span class="voxfont">VOX/FOX</span> is based on multivariate cryptography 
   (UOV problem and the problem of solving algebraic equations).
   </p>
@@ -58,16 +64,34 @@ Version 1.1 (17/05/2024): In-depth analysis of the impact of rectangular attacks
    </li>
 </ul>
 
+    <h2>Why <span class="voxfont">FOX</span>?</h2>
+	<p>
+	<ul>
+	<li>With <span class="voxfont">FOX</span>, we have short signatures.</li>
+	<li>We have very fast verification performance (see the performance table below).</li>
+	<li>We have nice arguments of security.</li>
+	<li><span class="voxfont">FOX</span> is a variant of UOV, a multivariate scheme that has been extensively analyzed for more than twenty years, and for which no major attack has been found.</li>
+	<li> It uses a new trick called ^+, which can only increase the security at a moderate performance cost.</li>
+	</ul>
+	</p>
+
+	<h2>Security arguments for <span class="voxfont">FOX</span></h2>
+	
+	<p>Thanks to the ^+ trick, it is possible to follow two opposite strategies.</p>
+	
+	<p>First, one can use this security increase to reduce parameter sizes, and try to use more aggressive optimizations.</p>
+	
+	<p>Second, one can keep a secure UOV instance, and then further enhance its security with the ˆ+ variant.</p>
+	
+	<p>In the design of <span class="voxfont">FOX</span>, we chose the second approach. Thus, <span class="voxfont">FOX</span> has very conservative parameters. Moreover, we selected our parameter sets so that the cost of canceling the added random polynomials for two public equations is the same as breaking the underlying UOV problem.</p>
+	
     <h2><span class="voxfont">FOX</span>: a UOV-based hash-and-sign signature scheme</h2>
-      <p><span class="voxfont">FOX</span> is a UOV-based hash-and-sign signature scheme from the Multivariate Quadratic
-    (MQ) family. In order to reduce the size of the public key, we use a new variant proposed by
-    Faugère, Macario-Rat, Patarin, and Perret under the name UOVˆ+. The UOVˆ+ has an interesting security property. The quadratic forms of a UOV
-    public key have a large common isotropic subspace, which is unusual for a random quadratic
-    system. UOVˆ+ adds a small number of random quadratic forms to the public keys to
-    hide this subspace. This makes the signing process more complex since we have to solve a
-    small quadratic system, but also allows us to reduce the public key of UOV for equivalent
-    security.</p>
-    <p>Hence, the size of the signature is only 124 bytes for FOX-I with security level I for public key size 50.3 Kbytes. The verification time is very 
+    <p><span class="voxfont">FOX</span> is a UOV-based hash-and-sign signature scheme from the Multivariate Quadratic
+    (MQ) family, built around a new variant proposed by Faugère, Macario-Rat, Patarin, and Perret under the name UOVˆ+ <a href="files/hat.pdf">[pdf]</a>.</p> 
+	<p>	While the quadratic forms of a UOV public key have a large common isotropic subspace, which is unusual for a random quadratic system, UOVˆ+ adds a small number of uniformly random quadratic forms to the public keys to hide this subspace. For the same parameter sizes, UOVˆ+ is then more secure than the corresponding UOV instance.</p>
+	
+	<p>Hence, <span class="voxfont">FOX</span> can keep all benefits of UOV, such as small signature sizes, fast signature generation, and extremely fast verification, while also offering an additional security guarantee.</p>
+    <p>As an illustration, the size of the signature is only 124 bytes for FOX-I with security level I for public key size 50.3 Kbytes. The verification time is very 
        good and we can sign 277 messages per second if the secret key is 
        decompressed.</p>
   <h2><span class="voxfont">FOX</span> Parameters </h2>
@@ -75,9 +99,10 @@ Version 1.1 (17/05/2024): In-depth analysis of the impact of rectangular attacks
   We define the parameters for each variant of FOX according to the three security levels
 defined by the NIST. </p>
 
-<img src="images/fox_parameters.png"
-     alt="FOX Parameters" title="Parameter sets and corresponding key and signature sizes for the FOX signature
-     scheme" height="150">
+<div style="text-align: center;">
+<img src="./VOX_files/fox_parameters.png" alt="FOX Parameters" title="Parameter sets and corresponding key and signature sizes for the FOX signature
+     scheme" height="90">
+</div>
 <p>The size of the signature (|sig|), the public key (|cpk|), the secret key (|sk|) 
 and the compressed secret key (|csk|) are expressed in bytes.</p>
 
@@ -86,11 +111,10 @@ and the compressed secret key (|csk|) are expressed in bytes.</p>
 
 <p>Using the reference implementation on a common laptop computer
 (11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz
-, TurboBoost enabled), <span
-class="voxfont">FOX</span> achieves the following performance:</p>
+, TurboBoost enabled), <span class="voxfont">FOX</span> achieves the following performance:</p>
 
 <table>
-<tr class="titlerow">
+<tbody><tr class="titlerow">
   <th>Level</th>
   <th>Keygen </th>
   <th>Sign </th>
@@ -124,18 +148,17 @@ class="voxfont">FOX</span> achieves the following performance:</p>
   <td class="values">16.70ms	/ 43293387 c</td>
   <td class="values">2.98ms	/ 7737203 c</td>
 </tr>
-</table>
+</tbody></table>
 
 <p>All the timings are given in milliseconds (ms) and in cycles (c)
 </p>
 
 <p>Using AVX2 implementation on a common laptop computer
   (11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz
-  , TurboBoost enabled), <span
-  class="voxfont">FOX</span> achieves the following performance:</p>
+  , TurboBoost enabled), <span class="voxfont">FOX</span> achieves the following performance:</p>
   
   <table>
-  <tr class="titlerow">
+  <tbody><tr class="titlerow">
     <th>Level</th>
     <th>Keygen </th>
     <th>Sign </th>
@@ -167,7 +190,7 @@ class="voxfont">FOX</span> achieves the following performance:</p>
     <td class="values">10.40ms	/ 26965333 c</td>
     <td class="values">0.59ms	/ 1532779 c</td>
   </tr>
-  </table>
+  </tbody></table>
   
   <p>All the timings are given in milliseconds (ms) and in cycles (c)
   </p>
@@ -181,19 +204,19 @@ class="voxfont">FOX</span> achieves the following performance:</p>
   <p><strong>(Version 2024-05-17):</strong> .</p>
 <ul>
 <li><span class="voxfont">VOX</span> specification v1.1
-  <a href="files/vox_1-1_spec.pdf">[pdf]</a>: In-depth analysis of the impact of rectangular attacks and other attacks led us to abandon the “Quotient Ring” (QR) structure, so that rank defects can no longer be exploited. This new specification focuses on “VOX-F” (or Full VOX, nicknamed “FOX”) with optimized parameters for the targeted I, III, V security levels, and a detailed performance analysis.
+  <a href="https://vox-sign.com/files/vox_1-1_spec.pdf">[pdf]</a>: In-depth analysis of the impact of rectangular attacks and other attacks led us to abandon the “Quotient Ring” (QR) structure, so that rank defects can no longer be exploited. This new specification focuses on “VOX-F” (or Full VOX, nicknamed “FOX”) with optimized parameters for the targeted I, III, V security levels, and a detailed performance analysis.
 </li>  
 <li><span class="voxfont">VOX/FOX</span> source files  
-  <a href="files/vox-fox_1-1_code.zip">[zip]</a> (source code C+AVX2)</li>
+  <a href="https://vox-sign.com/files/vox-fox_1-1_code.zip">[zip]</a> (source code C+AVX2)</li>
 <li><span class="voxfont">VOX/FOX</span> KAT files 
-  <a href="files/vox-fox_1-1_kat.zip">[zip]</a></li>
+  <a href="https://vox-sign.com/files/vox-fox_1-1_kat.zip">[zip]</a></li>
 </ul>
 
 <p><strong>(Version 2023-07-28):</strong> .</p>
 
 <ul>
   <li><span class="voxfont">VOX</span> specification v1.0a
-  <a href="files/VOX_28-07-2023.pdf">[pdf]</a>: Clarification added in the matrix representation of the linear mappings and their operations on vectors.
+  <a href="https://vox-sign.com/files/VOX_28-07-2023.pdf">[pdf]</a>: Clarification added in the matrix representation of the linear mappings and their operations on vectors.
   </li>
   </ul>
   
@@ -201,18 +224,19 @@ class="voxfont">FOX</span> achieves the following performance:</p>
 
 <ul>
 <li><span class="voxfont">VOX</span> specification v1.0
-  <a href="files/vox_nist.pdf">[pdf]</a></li>
+  <a href="https://vox-sign.com/files/vox_nist.pdf">[pdf]</a></li>
 <li><span class="voxfont">VOX</span> source files  
-  <a href="files/vox_nist.zip">[zip]</a> (specification, source code C+AVX2+Flint, performance tool)</li>
+  <a href="https://vox-sign.com/files/vox_nist.zip">[zip]</a> (specification, source code C+AVX2+Flint, performance tool)</li>
 <li><span class="voxfont">VOX</span> KAT files 
-  <a href="files/vox_kat.zip">[zip]</a></li>
+  <a href="https://vox-sign.com/files/vox_kat.zip">[zip]</a></li>
 <li>Simpler implementation in Flint  
-  <a href="files/vox_flint.zip">[zip]</a>.</li>
+  <a href="https://vox-sign.com/files/vox_flint.zip">[zip]</a>.</li>
 <li><span class="voxfont">VOX</span> Full submission package 
-    <a href="files/vox_nist_full.zip">[zip]</a> 
+    <a href="https://vox-sign.com/files/vox_nist_full.zip">[zip]</a> 
     (specification, source code C+AVX2+Flint, performance tool and  test vectors)</li>
 </ul>
 
 
-</body>
-</html>
+
+
+</body></html>
