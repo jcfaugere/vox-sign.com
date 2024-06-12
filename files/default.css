@@ -1,0 +1,40 @@
+html {
+	background-color: #ffffff;
+	font-family: sans-serif;
+	line-height: 1.15;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	width: auto;
+	max-width: 50em;
+	margin: auto;
+	text-align: justify;
+}
+
+span.voxfont {
+	font-variant: small-caps;
+}
+
+table {
+	margin: auto;
+}
+
+table, th, td {
+	border: 1px solid #808080;
+	padding: 0.3em;
+	border-collapse: collapse;
+}
+
+th {
+	font-weight: bold;
+}
+
+td.values {
+	text-align: right;
+}
+
+ul li {
+	margin-bottom: 1em;
+}
